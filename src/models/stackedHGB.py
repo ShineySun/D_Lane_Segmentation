@@ -51,7 +51,8 @@ class Hourglass(nn.Module):
         low3 = low2
         for j in range(self.nModules):
             low3 = self.low3_[j](low3)
-        up2 = self.up2(low3)
+        #up2 = self.up2(low3)
+        up2 = nn.Upsample(size=(up1.shape[2], up1.shape[3]), mode='bilinear')(low3)
 
         return up1 + up2
 
@@ -102,8 +103,8 @@ class HourglassNet3D(nn.Module):
 
         self.sigmoid = nn.Sigmoid()
 
-    # def forward(self, x, line):
-    def forward(self, x):
+    def forward(self, x, line = None):
+    #def forward(self, x):
         x_1 = self.conv1_(x)    # conv 7x7
         x_2 = self.bn1(x_1)
         x_3 = self.relu(x_2)
@@ -137,14 +138,15 @@ class HourglassNet3D(nn.Module):
         lineOut4 = self.deconv2(lineOut1)
         lineOut2 = self.relu(self.bn3(lineOut4))
         lineOut3 = self.conv2(lineOut2)
-        # lineOut5 = self.bn4(lintOut3)
-        # lineOut5 = self.soft(lineOut4)
+
+        if line is None:
+            return lineOut3
 
         # line_loss = nn.MSELoss()(lineOut3, line)
         # loss = line_loss
         #
-        # return loss, line_loss, lineOut3
-        return lineOut3, lineOut2
+        return loss, line_loss, lineOut3
+        #return lineOut3, lineOut2
 
 
 def createModel(opt):

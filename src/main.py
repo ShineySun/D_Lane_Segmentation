@@ -4,18 +4,19 @@ import sys
 import opts
 import math
 import importlib
-from preprocess import *
 import _init_paths
-import torch
+
+import cv2
 from PIL import Image
+
+import torch
 import torchvision.transforms as transforms
 from torch.autograd import Variable
-import cv2
+
 import numpy as np
+from preprocess import *
 
 # python3 main.py --netType stackedHGB --GPUs 0 --LR 0.001 --batchSize 1 --nStack 7 --optim Adam
-
-
 
 def main():
     os.environ["CUDA_VISIBLE_DEVICES"] = '0'
