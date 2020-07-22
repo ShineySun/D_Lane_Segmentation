@@ -5,4 +5,6 @@ Deep Lane Segmentation using SHG Module
 > * infence code create
 
 ## Inference
-'python3 inference.py --netType stackedHGB --GPUs 0 --LR 0.001 --nStack 7 --batchSize 1'
+'''markdown
+     python3 inference.py --netType stackedHGB --GPUs 0 --LR 0.001 --nStack 7 --batchSize 1
+'''
