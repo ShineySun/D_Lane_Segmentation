@@ -34,7 +34,7 @@ def parse():
     parser.add_argument('--nEpochs',          default=200,
                         type=int,        help='Number of total epochs to run')
     parser.add_argument('--epochNum',         default=-1,             type=int,
-                        help='0=retrain | -1=latest | -2=best', choices=[0, -1, -2])
+                        help='0=retrain | -1=latest | -2=best')
     parser.add_argument('--batchSize',        default=4,
                         type=int,        help='mini-batch size')
     parser.add_argument('--saveEpoch',        default=10,
