@@ -1,4 +1,4 @@
-# python3 video_test.py --netType stackedHGB --GPUs 0 --LR 0.001 --batchSize 1
+# python3 inference.py --netType stackedHGB --GPUs 0 --LR 0.001 --nStack 7 --batchSize 1
 
 import sys
 #print(sys.path)
@@ -108,6 +108,8 @@ def main():
 
     prev_time = 0
 
+    fps_list = []
+
     while True:
         ret, frame = cap.read()
 
@@ -139,12 +141,15 @@ def main():
                 sec = end_time - cur_time
 
                 fps = 1/sec
+                fps_list.append(fps)
 
                 print("Estimated fps {0} " . format(fps))
 
 
                 cv2.imshow("output", output)
-                cv2.waitKey(1)
+
+                key = cv2.waitKey(1) & 0xFF
+                if key == 27: break
 
 
 if __name__ == '__main__':
