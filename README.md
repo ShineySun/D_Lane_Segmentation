@@ -7,5 +7,6 @@ Deep Lane Segmentation using SHG Module
 ## Inference
 > python3 inference.py --netType stackedHGB --GPUs 0 --LR 0.001 --nStack 7 --batchSize 1
 
-## Inferen Video
+## Inference Video
+* KMU Self-Driving-Studio
 ![av_gif](./gif/Driving_Studio_Output.gif)
