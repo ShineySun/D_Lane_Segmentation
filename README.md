@@ -10,6 +10,24 @@ Folders
 | datasets   | define dataloader interfaces |
 | criterions | define criterion interfaces  |
 | util       | visulization utilities       |
+
+-----
+Directory
+-----
+```
+app
+└── screens
+    └── App
+        └── screens
+            ├── Admin
+            │   └── screens
+            │       ├── Reports
+            │       └── Users
+            └── Course
+                └── screens
+                    └── Assignments
+```
+
 > 2020.07.15
 > * infence code create
 
