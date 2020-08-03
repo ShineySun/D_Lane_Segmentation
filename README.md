@@ -16,10 +16,10 @@ Directory
 -----
 ```
 D_Lane_Segmentation
-└── src
-│    └── App
-│        └── screens
-│            ├── Admin
+├── src
+│    ├── App
+│    |   ├── screens
+│    |       ├── Admin
 │            │   └── screens
 │            │       ├── Reports
 │            │       └── Users
