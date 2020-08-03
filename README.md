@@ -1,6 +1,15 @@
 # D_Lane_Segmentation
 Deep Lane Segmentation using SHG Module
 
+-----
+Folders
+-----
+| Folder     | Description                  |
+|------------|------------------------------|
+| models      | network architectures and parameters |
+| datasets   | define dataloader interfaces |
+| criterions | define criterion interfaces  |
+| util       | visulization utilities       |
 > 2020.07.15
 > * infence code create
 
