@@ -27,6 +27,8 @@ D_Lane_Segmentation
 │                └── screens
 │                    └── Assignments
 └── result
+      └── Unet_weight
+      └── SHG_weight
 ```
 
 > 2020.07.15
