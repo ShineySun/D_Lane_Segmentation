@@ -32,7 +32,10 @@ D_Lane_Segmentation
 > * infence code create
 
 ## Inference
-> python3 inference.py --netType stackedHGB --GPUs 0 --LR 0.001 --nStack 7 --batchSize 1
+# Stacked Hourglass Network
+> python3 inference.py --netType stackedHGB --nStack 7
+# Unet
+> python3 inference_unet.py --netType Unet
 
 ## Inference Video
 > KMU Self-Driving-Studio
