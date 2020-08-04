@@ -31,10 +31,8 @@ D_Lane_Segmentation
 
 ## Inference
 #### Download Weight File
-- [Weight File](https://drive.google.com/drive/folders/18q5HJHThWr_uRyEm6_CkWK74C5ufr2WQ?usp=sharing)
-> Download SHG_weight, Unet_weight
-> mkdir result
-> tar -zxvf SHG_weight.tar.gz && tar -zxvf Unet_weight.tar.gz
+- [Weight File](https://drive.google.com/drive/folders/18q5HJHThWr_uRyEm6_CkWK74C5ufr2WQ?usp=sharing) Download SHG_weight, Unet_weight
+> mkdir result && tar -zxvf SHG_weight.tar.gz && tar -zxvf Unet_weight.tar.gz 
 
 #### Stacked Hourglass Network
 > python3 inference.py --netType stackedHGB --resume ../result/SHG_weight --nStack 7
