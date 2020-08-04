@@ -17,17 +17,14 @@ Directory
 ```
 D_Lane_Segmentation
 ├── src
-│    ├── App
-│    |   ├── screens
-│    |       ├── Admin
-│            │   └── screens
-│            │       ├── Reports
-│            │       └── Users
-│            └── Course
-│                └── screens
-│                    └── Assignments
+│    ├── models
+│    ├── input_video
+│    ├── datasets   
+│    ├── output_video
+│    └── util
+|
 └── result
-      └── Unet_weight
+      ├── Unet_weight
       └── SHG_weight
 ```
 
