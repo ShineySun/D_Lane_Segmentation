@@ -1,4 +1,5 @@
-# D_Lane_Segmentation
+# Deep_Lane_Segmentation
+### KMU HCI Lab
 Deep Lane Segmentation using SHG Module
 
 -----
@@ -22,20 +23,19 @@ D_Lane_Segmentation
 │    ├── datasets   
 │    ├── output_video
 │    └── util
-|
+│
 └── result
-      ├── Unet_weight
-      └── SHG_weight
+     ├── Unet_weight
+     └── SHG_weight
 ```
 
-> 2020.07.15
-> * infence code create
-
 ## Inference
+### Download Weight File
+- [Weight File](https://drive.google.com/drive/folders/18q5HJHThWr_uRyEm6_CkWK74C5ufr2WQ?usp=sharing) Download SHG_weight, Unet_weight
 #### Stacked Hourglass Network
-> python3 inference.py --netType stackedHGB --nStack 7
+> python3 inference.py --netType stackedHGB --resume ../result/SHG_weight --nStack 7
 #### Unet
-> python3 inference_unet.py --netType Unet
+> python3 inference_unet.py --netType Unet --resume ../result/Unet_weight
 
 ## Inference Video
 > KMU Self-Driving-Studio
