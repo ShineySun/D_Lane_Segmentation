@@ -32,9 +32,9 @@ D_Lane_Segmentation
 > * infence code create
 
 ## Inference
-# Stacked Hourglass Network
+#### Stacked Hourglass Network
 > python3 inference.py --netType stackedHGB --nStack 7
-# Unet
+#### Unet
 > python3 inference_unet.py --netType Unet
 
 ## Inference Video
