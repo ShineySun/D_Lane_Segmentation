@@ -30,6 +30,15 @@ D_Lane_Segmentation
      └── SHG_weight
 ```
 
+## Requirements
+- python3(recommend) or python2
+- pytorch==1.4.0
+- torchvision
+- opencv==3.3.1
+- scipy, numpy, progress, protobuf
+- joblib (for parallel processing data.)
+- tqdm
+
 ## Inference
 #### Download Weight File
 - [Weight File](https://drive.google.com/drive/folders/18q5HJHThWr_uRyEm6_CkWK74C5ufr2WQ?usp=sharing) Download SHG_weight, Unet_weight

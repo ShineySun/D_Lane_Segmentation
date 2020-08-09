@@ -96,7 +96,7 @@ def main():
 
     model.eval()
 
-    cap = cv2.VideoCapture("input_video/TEST11.avi")
+    cap = cv2.VideoCapture("input_video/Driving_Studio.avi")
 
     if cap.isOpened():
         print("width : {}, height : {}".format(cap.get(3), cap.get(4)))
@@ -104,8 +104,8 @@ def main():
     video_width = int(cap.get(3))
     video_height = int(cap.get(4))
 
-    fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-    out = cv2.VideoWriter('output_video/TEST_1.avi', fourcc, 25.0, (video_width,video_height),0)
+    # fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
+    # out = cv2.VideoWriter('output_video/TEST_1.avi', fourcc, 20.0, (1280,480),0)
 
     prev_time = 0
 
@@ -116,9 +116,9 @@ def main():
 
         if ret:
             cur_time = time.time()
-            frame = cv2.resize(frame, (320,240))
+            frame_new = cv2.resize(frame, (320,240))
 
-            input_img = frame / 255.
+            input_img = frame_new / 255.
             input_img = preprocess_img(input_img)
 
             # array to tensor
@@ -129,8 +129,8 @@ def main():
 
                 # inference
                 output = model.forward(inputData_var)
+                output = torch.sigmoid(output)
 
-                print("output.shape : ", output.shape)
 
                 # gpu -> cpu,  tensor -> numpy
                 output = output.detach().cpu().numpy()
@@ -142,18 +142,28 @@ def main():
                 output = np.clip(output, 0, 255)
                 output = np.uint8(output)
 
+                output = cv2.resize(output, (640, 480))
+                # output = cv2.cvtColor(output, cv2.COLOR_GRAY2BGR)
+
+                #ret, output = cv2.threshold(output, 127, 255, cv2.THRESH_BINARY)
+
                 end_time = time.time()
                 sec = end_time - cur_time
+
+
+                # add_img = cv2.hconcat([frame, output])
+                # print("add_img.shape : ", add_img.shape)
 
                 fps = 1/sec
                 fps_list.append(fps)
 
                 print("Estimated fps {0} " . format(fps))
 
-                #out.write(output)
+                # out.write(add_img)
 
 
-                cv2.imshow("output", output)
+                # cv2.imshow("output", add_img)
+                cv2.imshow("out_img", output)
 
                 key = cv2.waitKey(1) & 0xFF
                 if key == 27: break
