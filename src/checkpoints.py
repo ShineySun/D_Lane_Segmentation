@@ -5,6 +5,7 @@ import torch.nn as nn
 
 def latest(opt):
     latestPath = os.path.join(opt.resume, 'latest.pth.tar')
+    print("latesPath : {}".format(latestPath))
     if not os.path.exists(latestPath):
         return None
     print('=> Loading the latest checkpoint ' + latestPath)
