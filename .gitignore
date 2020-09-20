@@ -1,1 +1,6 @@
 *.pyc
+
+*.avi
+*.mp4
+
+result/

@@ -95,7 +95,7 @@ def main():
 
     model.eval()
 
-    cap = cv2.VideoCapture("input_video/Driving_Studio.avi")
+    cap = cv2.VideoCapture("input_video/solidYellow.mp4")
 
     if cap.isOpened():
         print("width : {}, height : {}".format(cap.get(3), cap.get(4)))
@@ -145,7 +145,7 @@ def main():
 
                 print("Estimated fps {0} " . format(fps))
 
-
+                cv2.imshow("input", frame)
                 cv2.imshow("output", output)
 
                 key = cv2.waitKey(1) & 0xFF

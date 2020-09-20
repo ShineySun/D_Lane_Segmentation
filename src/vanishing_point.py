@@ -259,7 +259,10 @@ def vanishing_point_detector(rgb_img, line_img):
     for i in range(len(sorted_score_vector)):
         tmp_index = np.where(score_vector == sorted_score_vector[i])
         #print("tmp_index : {}".format(tmp_index))
-        score_idx.append(tmp_index[0][0])
+        try:
+            score_idx.append(tmp_index[0][0])
+        except:
+            return None
 
     if len(VP)//4 <= 0:
         return None
@@ -367,7 +370,7 @@ def main():
 
     model.eval()
 
-    cap = cv2.VideoCapture("input_video/Driving_Studio.avi")
+    cap = cv2.VideoCapture("output_video/Driving_Studio_Output.avi")
 
     if cap.isOpened():
         print("width : {}, height : {}".format(cap.get(3), cap.get(4)))
@@ -425,7 +428,7 @@ def main():
                 output[output<120] = 0
                 # output[output<=40] = 0
 
-                line_img = vanishing_point_detector(frame, output)
+                line_img = vanishing_point_detector(frame, cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY))
 
 
 

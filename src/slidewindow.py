@@ -119,5 +119,5 @@ class SlideWindow:
         return False, left_start_x, right_start_x, cf_img
 
 
-    def h_slidewindow(self, img, x_left_start, x_left_start):
+    def h_slidewindow(self, img, left_start_x, right_start_x):
         return None
