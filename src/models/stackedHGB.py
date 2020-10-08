@@ -104,14 +104,21 @@ class HourglassNet3D(nn.Module):
         self.sigmoid = nn.Sigmoid()
 
     def forward(self, x, line = None):
-    #def forward(self, x):
-        x_1 = self.conv1_(x)    # conv 7x7
+        print("Input Shape : {}".format(x.shape))
+        x_1 = self.conv1_(x)
+        print("Conv1 Shape : {}".format(x_1.shape))
         x_2 = self.bn1(x_1)
+        print("BN1 Shape : {}".format(x_2.shape))
         x_3 = self.relu(x_2)
+        print("RELU 1 Shape : {}".format(x_3.shape))
         x_4 = self.r1(x_3)
+        print("PRM 1 Shape : {}".format(x_4.shape))
         x_5 = self.maxpool(x_4)
+        print("MAXPOOL 1 Shape : {}".format(x_5.shape))
         x_6 = self.r4(x_5)
-        x_7 = self.r5(x_6)
+        print("PRM 2 Shape : {}".format(x_6.shape))
+        x_7 = self.r5(x_5)
+        print("PRM 3 Shape : {}".format(x_7.shape))
 
         out = []
 
@@ -119,7 +126,6 @@ class HourglassNet3D(nn.Module):
         for i in range(self.nStack):
             hg = self.hourglass[i](x_7)
             if i == 4:
-                #print("self.nStack :",self.nStack)
                 hg_1 = hg
             ll = hg
             for j in range(self.nModules):
@@ -131,13 +137,19 @@ class HourglassNet3D(nn.Module):
             ll_ = self.ll_[i](ll)
             tmpOut_ = self.tmpOut_[i](tmpOut)
             x_7 = x_7 + ll_ + tmpOut_
+            print("HG Shape : {}".format(x_7.shape))
 
         shareFeat = out[-1]
         lineOut0 = self.deconv1(shareFeat)
+        print("Deconv 1 Shape : {}".format(lineOut0.shape))
         lineOut1 = self.relu(self.bn2(lineOut0))
+        print("BN 2 Shape : {}".format(lineOut1.shape))
         lineOut4 = self.deconv2(lineOut1)
+        print("Deconv 2 Shape : {}".format(lineOut4.shape))
         lineOut2 = self.relu(self.bn3(lineOut4))
+        print("BN 3 Shape : {}".format(lineOut2.shape))
         lineOut3 = self.conv2(lineOut2)
+        print("Conv 2 Shape : {}".format(lineOut3.shape))
 
         if line is None:
             return lineOut3

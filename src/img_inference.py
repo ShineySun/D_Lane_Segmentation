@@ -95,64 +95,46 @@ def main():
 
     model.eval()
 
-    cap = cv2.VideoCapture("input_video/solidYellow.mp4")
+    image = cv2.imread("0000.png")
+    image = cv2.resize(image,(640,480))
 
-    if cap.isOpened():
-        print("width : {}, height : {}".format(cap.get(3), cap.get(4)))
+    cur_time = time.time()
 
-    video_width = int(cap.get(3))
-    video_height = int(cap.get(4))
+    input_img = image / 255.
+    input_img = preprocess_img(input_img)
 
-    # fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-    # out = cv2.VideoWriter('output_video/TEST.avi', fourcc, 25.0, (video_width,video_height),0)
+    # array to tensor
+    input_img = torch.from_numpy(input_img).float()
 
-    prev_time = 0
+    with torch.no_grad():
+        inputData_var = Variable(input_img).unsqueeze(0).cuda()
 
-    fps_list = []
+        # inference
+        output = model.forward(inputData_var, None)
 
-    while True:
-        ret, frame = cap.read()
+        # gpu -> cpu,  tensor -> numpy
+        output = output.detach().cpu().numpy()
 
-        if ret:
-            cur_time = time.time()
+        output = output[0]
 
-            input_img = frame / 255.
-            input_img = preprocess_img(input_img)
+        output = postprocess_img(output)
+        output = np.clip(output, 0, 255)
+        output = np.uint8(output)
 
-            # array to tensor
-            input_img = torch.from_numpy(input_img).float()
+        #output[output > 100] = 255
+        #output[output <= 100] = 0
 
-            with torch.no_grad():
-                inputData_var = Variable(input_img).unsqueeze(0).cuda()
+        end_time = time.time()
+        sec = end_time - cur_time
 
-                # inference
-                output = model.forward(inputData_var, None)
+        fps = 1/sec
 
-                # gpu -> cpu,  tensor -> numpy
-                output = output.detach().cpu().numpy()
+        print("Estimated fps {0} " . format(fps))
 
-                output = output[0]
+        cv2.imshow("input", image)
+        cv2.imshow("output", output)
 
-                output = postprocess_img(output)
-                output = np.clip(output, 0, 255)
-                output = np.uint8(output)
-
-                output[output > 100] = 255
-                output[output <= 100] = 0
-
-                end_time = time.time()
-                sec = end_time - cur_time
-
-                fps = 1/sec
-                fps_list.append(fps)
-
-                print("Estimated fps {0} " . format(fps))
-
-                cv2.imshow("input", frame)
-                cv2.imshow("output", output)
-
-                key = cv2.waitKey(1) & 0xFF
-                if key == 27: break
+        key = cv2.waitKey(-1) & 0xFF
 
 
 if __name__ == '__main__':

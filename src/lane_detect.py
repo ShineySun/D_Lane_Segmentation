@@ -387,7 +387,7 @@ def main():
 
         if ret:
             cur_time = time.time()
-            frame_new = cv2.resize(frame, (320,180))
+            frame_new = cv2.resize(frame, (640,480))
 
             input_img = frame_new / 255.
             input_img = preprocess_img(input_img)
@@ -421,22 +421,20 @@ def main():
 
 
                 output = cv2.resize(output, (640, 480))
-                output[output>=120] = 255
-                output[output<120] = 0
+                # output[output>=120] = 255
+                # output[output<120] = 0
                 # output[output<=40] = 0
 
-                line_img = vanishing_point_detector(frame, output)
+                #line_img = vanishing_point_detector(frame, output)
 
 
 
                 #ret, thr_img = cv2.threshold(output, 50, 255, cv2.THRESH_BINARY)
-                # warper_img, point_img = warper.warp(output)
-                # ret, left_start_x, right_start_x, cf_img = slidewindow.w_slidewindow(warper_img)
-                #erode_img = cv2.erode(warper_img, np.ones((5,5), np.uint8), iterations=2)
-                #canny_img = cv2.Canny(warper_img, 80,120)
+                warper_img = warper.warp(output)
+                ret, left_start_x, right_start_x, cf_img = slidewindow.w_slidewindow(warper_img)
 
-                if line_img is not None:
-                    out.write(line_img)
+                # if line_img is not None:
+                #     out.write(line_img)
 
 
 
@@ -457,7 +455,7 @@ def main():
                 cv2.imshow("frame",frame)
                 # cv2.imshow("src", warper_img)
                 cv2.imshow("out_img", output)
-                # cv2.imshow("cf_img", cf_img)
+                cv2.imshow("cf_img", cf_img)
                 #cv2.imshow("canny_img", erode_img)
                 # cv2.imshow("out_img2", otsu_img_2)
 

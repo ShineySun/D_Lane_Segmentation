@@ -57,7 +57,7 @@ class SlideWindow:
         right_start_x = None
         right_start_y = None
 
-        dist_threshold = 120
+        dist_threshold = 200
         dist = None
 
         for i in range(0,n_windows):

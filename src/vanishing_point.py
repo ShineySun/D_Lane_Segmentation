@@ -95,7 +95,7 @@ def vanishing_point_detector(rgb_img, line_img):
 
         #cv2.line(rgb_img, (x1,y1), (x2,y2), (0,0,255), 1)
 
-        if x1==x2 or y1==y2 or (angle < 10 and angle > -10):
+        if x1==x2 or y1==y2 or (angle < 10 or angle > -10):
             continue
         elif dist > dist_threshold:
             tmp = np.array([[dist]])
